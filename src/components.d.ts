@@ -6,6 +6,13 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface KizunaButton {
+        "appearance": string;
+        "block": boolean;
+        "text": string;
+    }
+    interface KizunaProgress {
+    }
     interface MyComponent {
         /**
           * The first name
@@ -22,6 +29,18 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLKizunaButtonElement extends Components.KizunaButton, HTMLStencilElement {
+    }
+    var HTMLKizunaButtonElement: {
+        prototype: HTMLKizunaButtonElement;
+        new (): HTMLKizunaButtonElement;
+    };
+    interface HTMLKizunaProgressElement extends Components.KizunaProgress, HTMLStencilElement {
+    }
+    var HTMLKizunaProgressElement: {
+        prototype: HTMLKizunaProgressElement;
+        new (): HTMLKizunaProgressElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -29,10 +48,19 @@ declare global {
         new (): HTMLMyComponentElement;
     };
     interface HTMLElementTagNameMap {
+        "kizuna-button": HTMLKizunaButtonElement;
+        "kizuna-progress": HTMLKizunaProgressElement;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface KizunaButton {
+        "appearance"?: string;
+        "block"?: boolean;
+        "text"?: string;
+    }
+    interface KizunaProgress {
+    }
     interface MyComponent {
         /**
           * The first name
@@ -48,6 +76,8 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
     interface IntrinsicElements {
+        "kizuna-button": KizunaButton;
+        "kizuna-progress": KizunaProgress;
         "my-component": MyComponent;
     }
 }
@@ -55,6 +85,8 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "kizuna-button": LocalJSX.KizunaButton & JSXBase.HTMLAttributes<HTMLKizunaButtonElement>;
+            "kizuna-progress": LocalJSX.KizunaProgress & JSXBase.HTMLAttributes<HTMLKizunaProgressElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
